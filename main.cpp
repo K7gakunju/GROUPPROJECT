@@ -11,8 +11,8 @@ using namespace std;
 class Activity {
 public:
     string name;
-    int maxCapacity;
-    int currentCapacity;
+    int max_capacity;
+    int current_capacity;
     vector<string> genders;
 
     Activity(string name, int maxCapacity) : name(name), maxCapacity(maxCapacity), currentCapacity(0) {}
