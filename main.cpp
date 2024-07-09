@@ -42,14 +42,6 @@ public:
     int group;
     vector<Activity*> activities;
 
-    Student(string firstName, string surname, string gender, int age, int group)
-            : firstName(firstName), surname(surname), gender(gender), age(age), group(group) {}
-
-    void addActivity(Activity* activity) {
-        activities.push_back(activity);
-        activity->addStudent(gender);
-    }
-};
 
 
 
