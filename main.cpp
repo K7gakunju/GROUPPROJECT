@@ -43,7 +43,7 @@ public:
     vector<Activity*> activities;
 
     Student(string firstName, string surname, string gender, int age, int group)
-            : firstName(firstName), surname(surname), gender(gender), age(age), group(group) {}
+            : FirstName(FirstName), Surname(Surname), Gender(Gender), Age(Age), Group(Group) {}
 
     void addActivity(Activity* activity) {
         activities.push_back(activity);
