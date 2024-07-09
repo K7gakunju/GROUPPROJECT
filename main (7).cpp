@@ -33,6 +33,8 @@ public:
     }
 };
 
+
+
 class Student {
 public:
     string firstName;
@@ -50,7 +52,6 @@ public:
         activity->addStudent(gender);
     }
 };
-
 
 
 
@@ -95,6 +96,7 @@ public:
         allocateActivities(&students.back());
     }
 
+
     void allocateActivities(Student* student) {
         int choice, numClubs = 0, numSports = 0;
         do {
@@ -132,6 +134,7 @@ public:
             }
         } while (true);
     }
+
 
     void displayActivities(vector<Activity>& activities) {
         for (int i = 0; i < activities.size(); ++i) {
