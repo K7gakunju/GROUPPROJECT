@@ -15,7 +15,7 @@ public:
     int currentCapacity;
     vector<string> genders;
 
-    Activity(string name, int maxCapacity) : Name(Name), MaxCapacity(MaxCapacity), CurrentCapacity(0) {}
+    Activity(string name, int maxCapacity) : name(name), maxCapacity(maxCapacity), currentCapacity(0) {}
 
     bool canAddStudent(string gender) {
         int genderCount = count(genders.begin(), genders.end(), gender);
@@ -35,15 +35,15 @@ public:
 
 class Student {
 public:
-    string FirstName;
-    string Surname;
-    string Gender;
-    int Age;
-    int Group;
+    string firstName;
+    string surname;
+    string gender;
+    int age;
+    int group;
     vector<Activity*> activities;
 
     Student(string firstName, string surname, string gender, int age, int group)
-            : FirstName(FirstName), Surname(Surname), Gender(Gender), Age(Age), Group(Group) {}
+            : firstName(firstName), surname(surname), gender(gender), age(age), group(group) {}
 
     void addActivity(Activity* activity) {
         activities.push_back(activity);
@@ -159,7 +159,7 @@ public:
         ofstream outFile("students.csv");
         outFile << "FirstName,Surname,Gender,Age,Group,Activities\n";
         for (const auto& student : students) {
-            outFile << student.FirstName << "," << student.Surname << "," << student.Gender << "," << student.Age << "," << student.Group << ",";
+            outFile << student.firstName << "," << student.surname << "," << student.gender << "," << student.age << "," << student.group << ",";
             for (size_t i = 0; i < student.activities.size(); ++i) {
                 outFile << student.activities[i]->name;
                 if (i != student.activities.size() - 1) outFile << "|";
@@ -178,8 +178,8 @@ public:
             switch (choice) {
                 case 1: addStudent(); break;
                 case 2: viewStudents(); break;
-                case 3: viewActivities(Clubs); break;
-                case 4: viewActivities(Sports); break;
+                case 3: viewActivities(clubs); break;
+                case 4: viewActivities(sports); break;
                 case 5: saveToFile(); break;
                 case 6: cout << "Exiting...\n"; break;
                 default: cout << "Invalid choice.\n";
