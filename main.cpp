@@ -159,7 +159,7 @@ public:
         ofstream outFile("students.csv");
         outFile << "FirstName,Surname,Gender,Age,Group,Activities\n";
         for (const auto& student : students) {
-            outFile << student.firstName << "," << student.surname << "," << student.gender << "," << student.age << "," << student.group << ",";
+            outFile << student.FirstName << "," << student.Surname << "," << student.Gender << "," << student.Age << "," << student.Group << ",";
             for (size_t i = 0; i < student.activities.size(); ++i) {
                 outFile << student.activities[i]->name;
                 if (i != student.activities.size() - 1) outFile << "|";
@@ -178,8 +178,8 @@ public:
             switch (choice) {
                 case 1: addStudent(); break;
                 case 2: viewStudents(); break;
-                case 3: viewActivities(clubs); break;
-                case 4: viewActivities(sports); break;
+                case 3: viewActivities(Clubs); break;
+                case 4: viewActivities(Sports); break;
                 case 5: saveToFile(); break;
                 case 6: cout << "Exiting...\n"; break;
                 default: cout << "Invalid choice.\n";
