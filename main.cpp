@@ -21,13 +21,13 @@ public:
         int gender_count = count(genders.begin(), genders.end(), gender);
         if (current_capacity >= max_capacity) return false;
         if (name == "Rugby" || name == "Athletics" || name == "Swimming" || name == "Soccer") {
-            return genderCount < (0.75 * maxCapacity);
+            return gender_count < (0.75 * max_capacity);
         } else {
-            return genderCount < (0.50 * maxCapacity);
+            return gender_count < (0.50 * max_capacity);
         }
     }
 
-    void addStudent(string gender) {
+    void add_student(string gender) {
         genders.push_back(gender);
         currentCapacity++;
     }
