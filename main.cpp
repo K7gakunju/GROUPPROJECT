@@ -35,11 +35,11 @@ public:
 
 class Student {
 public:
-    string firstName;
-    string surname;
-    string gender;
-    int age;
-    int group;
+    string FirstName;
+    string Surname;
+    string Gender;
+    int Age;
+    int Group;
     vector<Activity*> activities;
 
     Student(string firstName, string surname, string gender, int age, int group)
