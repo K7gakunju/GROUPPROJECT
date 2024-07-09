@@ -110,7 +110,7 @@ public:
                 int clubChoice;
                 cout << "Select a club: ";
                 cin >> clubChoice;
-                if (clubs[clubChoice - 1].canAddStudent(student->gender)) {
+                if (clubs[clubChoice - 1].can_add_student(student->gender)) {
                     student->addActivity(&clubs[clubChoice - 1]);
                     numClubs++;
                 } else {
