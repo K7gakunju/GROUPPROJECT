@@ -34,6 +34,7 @@ public:
 };
 
 
+
 class Student {
 public:
     string firstName;
@@ -51,7 +52,6 @@ public:
         activity->addStudent(gender);
     }
 };
-
 
 
 
@@ -134,6 +134,72 @@ public:
             }
         } while (true);
     }
+
+
+    void displayActivities(vector<Activity>& activities) {
+        for (int i = 0; i < activities.size(); ++i) {
+            cout << i + 1 << ". " << activities[i].name << " (" << activities[i].currentCapacity << "/" << activities[i].maxCapacity << ")\n";
+        }
+    }
+
+    void viewStudents() {
+        for (const auto& student : students) {
+            cout << student.firstName << " " << student.surname << ", Group " << student.group << ", Activities: ";
+            for (const auto& activity : student.activities) {
+                cout << activity->name << " ";
+            }
+            cout << endl;
+        }
+    }
+
+    void viewActivities(vector<Activity>& activities) {
+        for (const auto& activity : activities) {
+            cout << activity.name << ": " << activity.currentCapacity << "/" << activity.maxCapacity << endl;
+        }
+    }
+
+    void saveToFile() {
+        ofstream outFile("students.csv");
+        outFile << "FirstName,Surname,Gender,Age,Group,Activities\n";
+        for (const auto& student : students) {
+            outFile << student.firstName << "," << student.surname << "," << student.gender << "," << student.age << "," << student.group << ",";
+            for (size_t i = 0; i < student.activities.size(); ++i) {
+                outFile << student.activities[i]->name;
+                if (i != student.activities.size() - 1) outFile << "|";
+            }
+            outFile << "\n";
+        }
+        outFile.close();
+        cout << "Data saved to students.csv\n";
+    }
+
+    void run() {
+        int choice;
+        do {
+            cout << "1. Add Student\n2. View Students\n3. View Clubs/Societies\n4. View Sports\n5. Save to File\n6. Exit\n";
+            cin >> choice;
+            switch (choice) {
+                case 1: addStudent(); break;
+                case 2: viewStudents(); break;
+                case 3: viewActivities(clubs); break;
+                case 4: viewActivities(sports); break;
+                case 5: saveToFile(); break;
+                case 6: cout << "Exiting...\n"; break;
+                default: cout << "Invalid choice.\n";
+            }
+        } while (choice != 6);
+    }
+};
+
+
+
+
+
+int main() {
+    CoCurricularSystem system;
+    system.run();
+    return 0;
+}
 
 
 
