@@ -168,11 +168,11 @@ public:
             cout << "1. Add Student\n2. View Students\n3. View Clubs/Societies\n4. View Sports\n5. Save to File\n6. Exit\n";
             cin >> choice;
             switch (choice) {
-                case 1: addStudent(); break;
-                case 2: viewStudents(); break;
-                case 3: viewActivities(clubs); break;
-                case 4: viewActivities(sports); break;
-                case 5: saveToFile(); break;
+                case 1: add_student(); break;
+                case 2: view_students(); break;
+                case 3: view_activities(clubs); break;
+                case 4: view_activities(sports); break;
+                case 5: save_to_file(); break;
                 case 6: cout << "Exiting...\n"; break;
                 default: cout << "Invalid choice.\n";
             }
@@ -185,7 +185,7 @@ public:
 
 
 int main() {
-    CoCurricularSystem system;
+    co_curricular_system system;
     system.run();
     return 0;
 }
