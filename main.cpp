@@ -141,24 +141,24 @@ public:
         }
     }
 
-    void viewActivities(vector<Activity>& activities) {
+    void view_activities(vector<Activity>& activities) {
         for (const auto& activity : activities) {
-            cout << activity.name << ": " << activity.currentCapacity << "/" << activity.maxCapacity << endl;
+            cout << activity.name << ": " << activity.current_capacity << "/" << activity.max_capacity << endl;
         }
     }
 
-    void saveToFile() {
+    void save_to_file() {
         ofstream outFile("students.csv");
-        outFile << "FirstName,Surname,Gender,Age,Group,Activities\n";
+        out_file << "first_name,Surname,Gender,Age,Group,Activities\n";
         for (const auto& student : students) {
-            outFile << student.firstName << "," << student.surname << "," << student.gender << "," << student.age << "," << student.group << ",";
+            out_file << student.first_name << "," << student.surname << "," << student.gender << "," << student.age << "," << student.group << ",";
             for (size_t i = 0; i < student.activities.size(); ++i) {
-                outFile << student.activities[i]->name;
-                if (i != student.activities.size() - 1) outFile << "|";
+                out_file << student.activities[i]->name;
+                if (i != student.activities.size() - 1) out_file << "|";
             }
-            outFile << "\n";
+            out_file << "\n";
         }
-        outFile.close();
+        out_file.close();
         cout << "Data saved to students.csv\n";
     }
 
