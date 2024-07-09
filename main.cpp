@@ -15,7 +15,7 @@ public:
     int currentCapacity;
     vector<string> genders;
 
-    Activity(string name, int maxCapacity) : name(name), maxCapacity(maxCapacity), currentCapacity(0) {}
+    Activity(string name, int maxCapacity) : Name(Name), MaxCapacity(MaxCapacity), CurrentCapacity(0) {}
 
     bool canAddStudent(string gender) {
         int genderCount = count(genders.begin(), genders.end(), gender);
