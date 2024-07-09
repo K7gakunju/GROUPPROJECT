@@ -15,11 +15,11 @@ public:
     int current_capacity;
     vector<string> genders;
 
-    Activity(string name, int maxCapacity) : name(name), maxCapacity(maxCapacity), currentCapacity(0) {}
+    Activity(string name, int max_capacity) : name(name), max_capacity(max_capacity), current_capacity(0) {}
 
-    bool canAddStudent(string gender) {
-        int genderCount = count(genders.begin(), genders.end(), gender);
-        if (currentCapacity >= maxCapacity) return false;
+    bool can_add_student(string gender) {
+        int gender_count = count(genders.begin(), genders.end(), gender);
+        if (current_capacity >= max_capacity) return false;
         if (name == "Rugby" || name == "Athletics" || name == "Swimming" || name == "Soccer") {
             return genderCount < (0.75 * maxCapacity);
         } else {
