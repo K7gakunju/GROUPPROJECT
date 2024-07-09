@@ -90,17 +90,17 @@ public:
     void allocate_activities(Student* student) {
         int choice, num_clubs = 0, numSports = 0;
         do {
-            cout << "Choose an activity for " << student->firstName << " " << student->surname << endl;
+            cout << "Choose an activity for " << student->first_name << " " << student->surname << endl;
             cout << "1. Add Sport\n2. Add Club/Society\n3. Done\n";
             cin >> choice;
 
             if (choice == 1 && numSports < 1) {
-                displayActivities(sports);
-                int sportChoice;
+                display_activities(sports);
+                int sport_choice;
                 cout << "Select a sport: ";
-                cin >> sportChoice;
-                if (sports[sportChoice - 1].canAddStudent(student->gender)) {
-                    student->addActivity(&sports[sportChoice - 1]);
+                cin >> sport_choice;
+                if (sports[sport_choice - 1].can_add_student(student->gender)) {
+                    student->add_activity(&sports[sportChoice - 1]);
                     numSports++;
                 } else {
                     cout << "Cannot add to this sport. Either full or gender limit reached.\n";
