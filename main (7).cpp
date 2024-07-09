@@ -95,6 +95,7 @@ public:
         allocateActivities(&students.back());
     }
 
+
     void allocateActivities(Student* student) {
         int choice, numClubs = 0, numSports = 0;
         do {
@@ -132,6 +133,7 @@ public:
             }
         } while (true);
     }
+
 
 
 
