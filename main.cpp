@@ -100,24 +100,24 @@ public:
                 cout << "Select a sport: ";
                 cin >> sport_choice;
                 if (sports[sport_choice - 1].can_add_student(student->gender)) {
-                    student->add_activity(&sports[sportChoice - 1]);
+                    student->add_activity(&sports[sport_choice - 1]);
                     numSports++;
                 } else {
                     cout << "Cannot add to this sport. Either full or gender limit reached.\n";
                 }
             } else if (choice == 2 && numClubs < 3) {
-                displayActivities(clubs);
-                int clubChoice;
+                display_activities(clubs);
+                int club_choice;
                 cout << "Select a club: ";
                 cin >> clubChoice;
-                if (clubs[clubChoice - 1].can_add_student(student->gender)) {
-                    student->addActivity(&clubs[clubChoice - 1]);
-                    numClubs++;
+                if (clubs[club_choice - 1].can_add_student(student->gender)) {
+                    student->add_activity(&clubs[club_choice - 1]);
+                    num_clubs++;
                 } else {
                     cout << "Cannot add to this club. Either full or gender limit reached.\n";
                 }
             } else if (choice == 3) {
-                if (numClubs + numSports >= 1) break;
+                if (num_clubs + num_sports >= 1) break;
                 else cout << "You must choose at least one activity.\n";
             } else {
                 cout << "Invalid choice or activity limit reached.\n";
@@ -125,9 +125,9 @@ public:
         } while (true);
     }
 
-    void displayActivities(vector<Activity>& activities) {
+    void display_activities(vector<Activity>& activities) {
         for (int i = 0; i < activities.size(); ++i) {
-            cout << i + 1 << ". " << activities[i].name << " (" << activities[i].currentCapacity << "/" << activities[i].maxCapacity << ")\n";
+            cout << i + 1 << ". " << activities[i].name << " (" << activities[i].current_capacity << "/" << activities[i].max_capacity << ")\n";
         }
     }
 
