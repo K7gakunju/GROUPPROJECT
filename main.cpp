@@ -29,13 +29,13 @@ public:
 
     void add_student(string gender) {
         genders.push_back(gender);
-        currentCapacity++;
+        current_capacity++;
     }
 };
 
 class Student {
 public:
-    string firstName;
+    string first_name;
     string surname;
     string gender;
     int age;
@@ -47,14 +47,14 @@ public:
 
 
 
-class CoCurricularSystem {
+class co_curricular_system {
 private:
     vector<Student> students;
     vector<Activity> sports;
     vector<Activity> clubs;
 
 public:
-    CoCurricularSystem() {
+    co_curricular_system() {
         // Initialize sports and clubs
         sports.push_back(Activity("Rugby", 20));
         sports.push_back(Activity("Athletics", 20));
@@ -68,8 +68,8 @@ public:
         clubs.push_back(Activity("Computer Science Club", 60));
     }
 
-    void addStudent() {
-        string firstName, surname, gender;
+    void add_student() {
+        string first_name, surname, gender;
         int age, group;
         cout << "Enter First Name: ";
         cin >> firstName;
@@ -82,13 +82,13 @@ public:
         cout << "Enter Group (1-3): ";
         cin >> group;
 
-        Student student(firstName, surname, gender, age, group);
+        Student student(first_name, surname, gender, age, group);
         students.push_back(student);
-        allocateActivities(&students.back());
+        allocate_activities(&students.back());
     }
 
-    void allocateActivities(Student* student) {
-        int choice, numClubs = 0, numSports = 0;
+    void allocate_activities(Student* student) {
+        int choice, num_clubs = 0, numSports = 0;
         do {
             cout << "Choose an activity for " << student->firstName << " " << student->surname << endl;
             cout << "1. Add Sport\n2. Add Club/Society\n3. Done\n";
