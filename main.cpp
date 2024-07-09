@@ -11,50 +11,58 @@ using namespace std;
 class Activity {
 public:
     string name;
-    int max_capacity;
-    int current_capacity;
+    int maxCapacity;
+    int currentCapacity;
     vector<string> genders;
 
-    Activity(string name, int max_capacity) : name(name), max_capacity(max_capacity), current_capacity(0) {}
+    Activity(string name, int maxCapacity) : name(name), maxCapacity(maxCapacity), currentCapacity(0) {}
 
-    bool can_add_student(string gender) {
-        int gender_count = count(genders.begin(), genders.end(), gender);
-        if (current_capacity >= max_capacity) return false;
+    bool canAddStudent(string gender) {
+        int genderCount = count(genders.begin(), genders.end(), gender);
+        if (currentCapacity >= maxCapacity) return false;
         if (name == "Rugby" || name == "Athletics" || name == "Swimming" || name == "Soccer") {
-            return gender_count < (0.75 * max_capacity);
+            return genderCount < (0.75 * maxCapacity);
         } else {
-            return gender_count < (0.50 * max_capacity);
+            return genderCount < (0.50 * maxCapacity);
         }
     }
 
-    void add_student(string gender) {
+    void addStudent(string gender) {
         genders.push_back(gender);
-        current_capacity++;
+        currentCapacity++;
     }
 };
 
 class Student {
 public:
-    string first_name;
+    string firstName;
     string surname;
     string gender;
     int age;
     int group;
     vector<Activity*> activities;
 
+    Student(string firstName, string surname, string gender, int age, int group)
+            : firstName(firstName), surname(surname), gender(gender), age(age), group(group) {}
+
+    void addActivity(Activity* activity) {
+        activities.push_back(activity);
+        activity->addStudent(gender);
+    }
+};
 
 
 
 
 
-class co_curricular_system {
+class CoCurricularSystem {
 private:
     vector<Student> students;
     vector<Activity> sports;
     vector<Activity> clubs;
 
 public:
-    co_curricular_system() {
+    CoCurricularSystem() {
         // Initialize sports and clubs
         sports.push_back(Activity("Rugby", 20));
         sports.push_back(Activity("Athletics", 20));
@@ -68,8 +76,8 @@ public:
         clubs.push_back(Activity("Computer Science Club", 60));
     }
 
-    void add_student() {
-        string first_name, surname, gender;
+    void addStudent() {
+        string firstName, surname, gender;
         int age, group;
         cout << "Enter First Name: ";
         cin >> firstName;
@@ -82,42 +90,42 @@ public:
         cout << "Enter Group (1-3): ";
         cin >> group;
 
-        Student student(first_name, surname, gender, age, group);
+        Student student(firstName, surname, gender, age, group);
         students.push_back(student);
-        allocate_activities(&students.back());
+        allocateActivities(&students.back());
     }
 
-    void allocate_activities(Student* student) {
-        int choice, num_clubs = 0, numSports = 0;
+    void allocateActivities(Student* student) {
+        int choice, numClubs = 0, numSports = 0;
         do {
-            cout << "Choose an activity for " << student->first_name << " " << student->surname << endl;
+            cout << "Choose an activity for " << student->firstName << " " << student->surname << endl;
             cout << "1. Add Sport\n2. Add Club/Society\n3. Done\n";
             cin >> choice;
 
             if (choice == 1 && numSports < 1) {
-                display_activities(sports);
-                int sport_choice;
+                displayActivities(sports);
+                int sportChoice;
                 cout << "Select a sport: ";
-                cin >> sport_choice;
-                if (sports[sport_choice - 1].can_add_student(student->gender)) {
-                    student->add_activity(&sports[sport_choice - 1]);
+                cin >> sportChoice;
+                if (sports[sportChoice - 1].canAddStudent(student->gender)) {
+                    student->addActivity(&sports[sportChoice - 1]);
                     numSports++;
                 } else {
                     cout << "Cannot add to this sport. Either full or gender limit reached.\n";
                 }
             } else if (choice == 2 && numClubs < 3) {
-                display_activities(clubs);
-                int club_choice;
+                displayActivities(clubs);
+                int clubChoice;
                 cout << "Select a club: ";
                 cin >> clubChoice;
-                if (clubs[club_choice - 1].can_add_student(student->gender)) {
-                    student->add_activity(&clubs[club_choice - 1]);
-                    num_clubs++;
+                if (clubs[clubChoice - 1].canAddStudent(student->gender)) {
+                    student->addActivity(&clubs[clubChoice - 1]);
+                    numClubs++;
                 } else {
                     cout << "Cannot add to this club. Either full or gender limit reached.\n";
                 }
             } else if (choice == 3) {
-                if (num_clubs + num_sports >= 1) break;
+                if (numClubs + numSports >= 1) break;
                 else cout << "You must choose at least one activity.\n";
             } else {
                 cout << "Invalid choice or activity limit reached.\n";
@@ -125,9 +133,9 @@ public:
         } while (true);
     }
 
-    void display_activities(vector<Activity>& activities) {
+    void displayActivities(vector<Activity>& activities) {
         for (int i = 0; i < activities.size(); ++i) {
-            cout << i + 1 << ". " << activities[i].name << " (" << activities[i].current_capacity << "/" << activities[i].max_capacity << ")\n";
+            cout << i + 1 << ". " << activities[i].name << " (" << activities[i].currentCapacity << "/" << activities[i].maxCapacity << ")\n";
         }
     }
 
@@ -141,24 +149,24 @@ public:
         }
     }
 
-    void view_activities(vector<Activity>& activities) {
+    void viewActivities(vector<Activity>& activities) {
         for (const auto& activity : activities) {
-            cout << activity.name << ": " << activity.current_capacity << "/" << activity.max_capacity << endl;
+            cout << activity.name << ": " << activity.currentCapacity << "/" << activity.maxCapacity << endl;
         }
     }
 
-    void save_to_file() {
+    void saveToFile() {
         ofstream outFile("students.csv");
-        out_file << "first_name,Surname,Gender,Age,Group,Activities\n";
+        outFile << "FirstName,Surname,Gender,Age,Group,Activities\n";
         for (const auto& student : students) {
-            out_file << student.first_name << "," << student.surname << "," << student.gender << "," << student.age << "," << student.group << ",";
+            outFile << student.firstName << "," << student.surname << "," << student.gender << "," << student.age << "," << student.group << ",";
             for (size_t i = 0; i < student.activities.size(); ++i) {
-                out_file << student.activities[i]->name;
-                if (i != student.activities.size() - 1) out_file << "|";
+                outFile << student.activities[i]->name;
+                if (i != student.activities.size() - 1) outFile << "|";
             }
-            out_file << "\n";
+            outFile << "\n";
         }
-        out_file.close();
+        outFile.close();
         cout << "Data saved to students.csv\n";
     }
 
@@ -168,11 +176,11 @@ public:
             cout << "1. Add Student\n2. View Students\n3. View Clubs/Societies\n4. View Sports\n5. Save to File\n6. Exit\n";
             cin >> choice;
             switch (choice) {
-                case 1: add_student(); break;
-                case 2: view_students(); break;
-                case 3: view_activities(clubs); break;
-                case 4: view_activities(sports); break;
-                case 5: save_to_file(); break;
+                case 1: addStudent(); break;
+                case 2: viewStudents(); break;
+                case 3: viewActivities(clubs); break;
+                case 4: viewActivities(sports); break;
+                case 5: saveToFile(); break;
                 case 6: cout << "Exiting...\n"; break;
                 default: cout << "Invalid choice.\n";
             }
@@ -185,12 +193,10 @@ public:
 
 
 int main() {
-    co_curricular_system system;
+    CoCurricularSystem system;
     system.run();
     return 0;
 }
-
-
 
 
 
