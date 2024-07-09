@@ -96,5 +96,46 @@ public:
     }
 
 
+    void allocateActivities(Student* student) {
+        int choice, numClubs = 0, numSports = 0;
+        do {
+            cout << "Choose an activity for " << student->firstName << " " << student->surname << endl;
+            cout << "1. Add Sport\n2. Add Club/Society\n3. Done\n";
+            cin >> choice;
+
+            if (choice == 1 && numSports < 1) {
+                displayActivities(sports);
+                int sportChoice;
+                cout << "Select a sport: ";
+                cin >> sportChoice;
+                if (sports[sportChoice - 1].canAddStudent(student->gender)) {
+                    student->addActivity(&sports[sportChoice - 1]);
+                    numSports++;
+                } else {
+                    cout << "Cannot add to this sport. Either full or gender limit reached.\n";
+                }
+            } else if (choice == 2 && numClubs < 3) {
+                displayActivities(clubs);
+                int clubChoice;
+                cout << "Select a club: ";
+                cin >> clubChoice;
+                if (clubs[clubChoice - 1].canAddStudent(student->gender)) {
+                    student->addActivity(&clubs[clubChoice - 1]);
+                    numClubs++;
+                } else {
+                    cout << "Cannot add to this club. Either full or gender limit reached.\n";
+                }
+            } else if (choice == 3) {
+                if (numClubs + numSports >= 1) break;
+                else cout << "You must choose at least one activity.\n";
+            } else {
+                cout << "Invalid choice or activity limit reached.\n";
+            }
+        } while (true);
+    }
+
+
+
+
 
 
